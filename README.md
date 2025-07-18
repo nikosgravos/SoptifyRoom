@@ -17,12 +17,7 @@ Built with **ASP.NET Core** in **Visual Studio**, this project was developed as 
 1. **Create a Spotify App**  
    - Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)  
    - Create a new app and set the redirect URI to: `https://localhost:5000/callback` 
-   - Make sure to enable the following APIs:  
-     - Web API  
-     - Web Playback SDK  
-     - Android  
-     - Ads API  
-     - iOS  
+   - Make sure to enable the following APIs: Web API, Web Playback SDK, Android, Ads API, iOS  
 
 2. **Clone the Project**  
    Open the repo in Visual Studio or any IDE of your choice.
