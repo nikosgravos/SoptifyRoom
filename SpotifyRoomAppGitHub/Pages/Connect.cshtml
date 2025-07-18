@@ -1,0 +1,81 @@
+﻿@page
+@model SpotifyRoomApp.Pages.ConnectModel
+@{
+    Layout = null;
+}
+
+<link rel="stylesheet" href="~/css/connect.css">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="~/images/icons/RoomLogo.png">
+
+<div class="split-container">
+    <div class="left-half">
+        <div class="title-with-logo">
+            <h1>Roomiify</h1>
+            <img src="images/icons/RoomLogo.png" class="title-logo" />
+        </div>
+        <p>Where your vibe becomes a space</p>
+        <a href="/Authorize" class="btn">
+            Connect with Spotify
+            <img src="images/icons/Spotify_Primary_Logo_RGB_White.png" class="spotify-logo" />
+        </a>
+    </div>
+
+    <div class="right-half">
+        <div class="slideshow-container">
+            <img src="images/rooms/PresetRoomFinal1_4K.png" class="slide active">
+            <img src="images/rooms/PopRoomFinal2_4K.png" class="slide">
+            <img src="images/rooms/RapRoomFinal1_4K.png" class="slide">
+            <img src="images/rooms/RockRoomFinal3_4K.png" class="slide">
+            <img src="images/rooms/UrbanoLatinoRoomFinal1_4K.png" class="slide">
+            <img src="images/rooms/HipHopRoomFinal4_4K.png" class="slide">
+            <img src="images/rooms/TrapLatinoRoomFinal1_4K.png" class="slide">
+            <img src="images/rooms/ReggaetonRoomFinal1_4K.png" class="slide">
+            <img src="images/rooms/DancePopRoomFinal2_4K.png" class="slide">
+            <img src="images/rooms/PopRapRoomFinal5_4K.png" class="slide">
+
+            <img src="images/rooms/TrapRoomFinal2_4K.png" class="slide">
+            <img src="images/rooms/AlternativeMetalRoomFinal1_4K.png" class="slide">
+            <img src="images/rooms/KPopRoomFinal1_4K.png" class="slide">
+            <img src="images/rooms/RnBRoomFinal3_4K.png" class="slide">
+            <img src="images/rooms/EDMRoomFinal1_4K.png" class="slide">
+            <img src="images/rooms/MelodicRapRoomFinal2_4K.png" class="slide">
+            <img src="images/rooms/CountryRoomFinal1_4K.png" class="slide">
+            <img src="images/rooms/MusicExplorerRoomFinal1_4K.png" class="slide">
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+    const total = slides.length;
+
+    function nextSlide() {
+        slides[current].classList.add('exiting');
+
+        setTimeout(() => {
+        slides[current].classList.remove('active', 'exiting');
+    const next = (current + 1) % total;
+    slides[next].classList.add('active');
+    current = next;
+        }, 800);
+    }
+
+
+    document.querySelector('a.btn').addEventListener('click', function(e) {
+        if (this.classList.contains('loading')) return;
+
+    this.classList.add('loading');
+    const originalText = this.innerHTML;
+    this.innerHTML = '<div class="spinner"></div>Connecting...';
+
+
+    });
+
+    setInterval(nextSlide, 6000);
+</script>

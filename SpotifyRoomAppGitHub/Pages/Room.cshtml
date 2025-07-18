@@ -1,0 +1,540 @@
+﻿@page
+@model SpotifyRoomApp.Pages.RoomModel
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="~/css/room.css">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="~/images/icons/RoomLogo.png">
+
+<div id="tooltip" class="tooltip"></div>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="header-content">
+        <a href="#top" class="title-with-logo">
+            <img src="images/icons/RoomLogo.png" class="title-logo" alt="SpotifyRoom Logo" />
+            <h1>Roomiify</h1>
+        </a>
+
+        <nav class="nav-buttons">
+            <a href="#petSection" class="genre-link-with-icon">
+                <span>Pet</span>
+            </a>
+            <a href="#genreStats" class="genre-link-with-icon">
+                <span>Stats</span>
+            </a>
+            <a href="#aboutSection" class="genre-link-with-icon">
+                <span>About</span>
+            </a>
+        </nav>
+    </div>
+</header>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">
+        @Model.ErrorMessage
+    </div>
+}
+else
+{
+    <div class="title-container">
+        <h3>@Model.Username's Room</h3>
+    </div>
+
+    <div class="nickname-container">
+        <h2>@Model.UserNickname</h2>
+    </div>
+
+    <!-- ROOM SECTION -->
+    <div class="image-container" id="imageContainer">
+        <img src="@Url.Content("~/images/rooms/" + Model.UserRoom + ".png")" class="cube-image" alt="Cube" />
+
+        @for (int i = 0; i < Model.TopTracks.Count; i++)
+        {
+            var track = Model.TopTracks[i];
+            <img src="@track.Album.Images.First().Url"
+                 alt="@track.Name"
+                 data-title="@track.Name"
+                 class="album-image album-@i"
+                 onclick="playPreview('@track.FetchedPreviewUrl', '@track.Album.Images.First().Url')" />
+
+        }
+
+        @if (Model.TopArtist != null)
+        {
+            <img src="@Model.TopArtist.Images.First().Url"
+                 alt="@Model.TopArtist.Name"
+                 class="artist-image"
+                 data-title="@Model.TopArtist.Name" />
+        }
+    </div>
+
+    <!-- SCROLL INDICATOR -->
+    <div class="scroll-indicator">
+        <div class="scroll-circle">
+            <img src="~/images/icons/Chevron-icon-drop-down-menu-WHITE.png" alt="Scroll Down" width="24" height="14">
+        </div>
+    </div>
+
+    <!-- PET SECTION -->
+    <div class="parallax-container" id="petSection">
+        <div class="pet-info">
+            <h2>@Model.Username's Pet</h2>
+            <h3>@Model.PetName</h3>
+            <p>@Model.PetDescription</p>
+        </div>
+
+        <div class="circle-window">
+            <img src="@Url.Content("~/images/pets/" + Model.UserPet + ".png")" alt="Image" class="parallax-image">
+        </div>
+    </div>
+
+    <!-- STATS SECTION -->
+    <div class="genre-section" id="genreStats">
+        <div class="genres-container" >
+            <div class="genre-text">
+                <h2>Your Top Genres</h2>
+                <p>An analytical breakdown of your most frequently listened-to musical genres based on your Spotify activity.</p>
+            </div>
+            <div class="genre-chart">
+                <canvas id="genreChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT SECTION -->
+    <div class="about-section" id="aboutSection">
+        <div class="about-content">
+            <p>Roomiify is a data visualization tool that converts your Spotify listening patterns into personalized visual profiles and statistics.</p>
+            <div class="about-links">
+                <a href="https://instagram.com/" target="_blank">Instagram</a>
+                <a href="https://tiktok.com/" target="_blank">TikTok</a>
+                <a href="https://github.com/" target="_blank">GitHub</a>
+            </div>
+            <div class="copyright">
+                © Roomiify
+            </div>
+        </div>
+    </div>
+
+}
+
+<!-- FOOTER -->
+<div class="footer-container">
+    <button id="trackButton" class="footer-button" onclick="toggleMute()">
+        <img id="currentTrackImage" class="footer-track-image" src="images/icons/Spotify_Primary_Logo_RGB_White.png" alt="Currently Playing Song" />
+    </button>
+
+    <button class="footer-button" onclick="toggleRoomGallery()">
+        <img src="images/icons/BlackLogoRoom.png" alt="Room Gallery Icon" class="footer-icon" />
+    </button>
+
+    <button class="footer-button" onclick="downloadRoomImage()">
+        <img src="images/icons/download-round-black-icon.png" alt="Save Icon" class="footer-icon" />
+    </button>
+
+    <button class="footer-button" onclick="copyLink(this)">
+        <img src="images/icons/copylinkicon.png" alt="Copy Icon" class="footer-icon" />
+    </button>
+</div>
+
+<!-- CHANGE ROOM POPUP -->
+<div id="roomGalleryPopup" class="room-gallery-popup">
+    <div class="room-gallery-content">
+        <div class="room-gallery-scroll">
+            @foreach (var info in Model.UserRoomInfos)
+            {
+                <img src="@Url.Content($"~/images/rooms/{info.Room}.png")"
+                     class="slide"
+                     alt="@info.Room"
+                     data-room="@info.Room"
+                     data-nickname="@info.Nickname"
+                     data-pet="@info.Pet"
+                     data-petname="@info.PetName"
+                     data-petdescription="@info.PetDescription" />
+            }
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // HEADER SCROLL EFFECT
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.site-header');
+        if (window.scrollY > 10) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+
+
+    //ROOM SECTION FADE IN
+    document.addEventListener('DOMContentLoaded', () => {
+        const imageContainer = document.querySelector('.image-container');
+        setTimeout(() => {
+            imageContainer.classList.add('fade-in');
+        }, 300);
+    });
+    
+
+    
+    //SONG TITLE ARTIST NAME TOOLTIP
+    const tooltip = document.getElementById('tooltip');
+
+    document.querySelectorAll('.album-image, .artist-image').forEach(img => {
+        img.addEventListener('mouseenter', e => {
+            tooltip.textContent = e.target.getAttribute('data-title');
+            tooltip.style.display = 'block';
+        });
+
+        img.addEventListener('mousemove', e => {
+            tooltip.style.left = (e.clientX + 15) + 'px';
+            tooltip.style.top = (e.clientY + 15) + 'px';
+        });
+
+        img.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+        });
+    });
+
+
+
+    // AUDIO PLAYER
+    let currentAudio = null;
+    const trackBtn = document.getElementById('trackButton');
+    const trackImg = document.getElementById('currentTrackImage');
+    function playPreview(previewUrl, albumImageUrl) {
+        if (!previewUrl || !previewUrl.trim()) {
+            alert("No preview available for this track.");
+            return;
+        }
+
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio = null;
+            stopMusicNotes();
+        }
+
+        currentAudio = new Audio(previewUrl);
+        currentAudio.loop = true;
+        currentAudio.volume = 0.05;
+        currentAudio.play().catch(err => console.error("Error playing audio:", err));
+
+        trackImg.src = albumImageUrl;
+        trackImg.classList.remove('muted');
+        trackBtn.classList.add('has-track');
+
+        startMusicNotes();
+    }
+
+
+
+    // MUTE TOGGLE
+    function toggleMute() {
+        if (!currentAudio) return;
+
+        if (currentAudio.paused) {
+            currentAudio.play();
+            trackImg.classList.remove('muted');
+            startMusicNotes();
+        } else {
+            currentAudio.pause();
+            trackImg.classList.add('muted');
+            stopMusicNotes();
+        }
+    }
+    
+
+
+    // PET CONTAINER ANIMATION
+    const container = document.querySelector('.parallax-container');
+    const image = document.querySelector('.parallax-image');
+    window.addEventListener('mousemove', (event) => {
+        const mouseX = event.clientX;
+        const mouseY = event.clientY;
+
+        const offsetX = (mouseX / window.innerWidth) * 2 - 1;
+        const offsetY = (mouseY / window.innerHeight) * 2 - 1;
+
+        image.style.transform = `translate(-50%, -50%) translate(${-offsetX * 10}px, ${-offsetY * 10}px)`;
+    });
+
+
+
+    // PET SECTION FADE IN
+    window.addEventListener('scroll', function () {
+        const container = document.querySelector('.circle-window');
+        const petInfo = document.querySelector('.pet-info');
+        const containerPosition = container.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if (containerPosition < windowHeight * 0.8) {
+            container.classList.add('fade-in');
+            petInfo.classList.add('fade-in');
+        }
+    });
+
+
+
+    //GENRE DONUT CHART
+    document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('genreChart').getContext('2d');
+
+        const data = {
+            labels: @Html.Raw(Json.Serialize(Model.TrackGenreList.Select(g => g.Genre))),
+            datasets: [{
+                data: @Html.Raw(Json.Serialize(Model.TrackGenreList.Select(g => g.Count))),
+                backgroundColor: [
+                    '#0F5E2A', '#137339', '#179947', '#1CAC53', '#1DB954', '#35C365', '#58CF80', '#7DDB9A', '#A2E7B4', '#C8F4CF'
+                ],
+                borderColor: '#121212',
+                borderWidth: 2
+            }]
+        };
+
+        const config = {
+            type: 'doughnut',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'white',
+                            font: { size: 14 }
+                        }
+                    }
+                }
+            }
+        };
+
+        new Chart(ctx, config);
+    });
+
+
+
+    //GENRE SECTION FADE IN
+    document.addEventListener('DOMContentLoaded', () => {
+        const genresContainer = document.querySelector('.genres-container');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    genresContainer.classList.add('fade-in');
+                    observer.unobserve(genresContainer);
+                }
+            });
+        }, {
+            threshold: 0.3
+        });
+
+        observer.observe(genresContainer);
+    });
+
+
+
+    //DOWNLOAD IMAGE
+    function downloadRoomImage() {
+        const container = document.getElementById('imageContainer');
+
+        const targetWidth = 2000;
+        const targetHeight = 2000;
+
+        const scaleX = targetWidth / container.offsetWidth;
+        const scaleY = targetHeight / container.offsetHeight;
+        const scale = Math.min(scaleX, scaleY);
+
+        html2canvas(container, {
+            backgroundColor: null,
+            useCORS: true,
+            width: container.offsetWidth,
+            height: container.offsetHeight,
+            scale: scale
+        }).then(canvas => {
+            const finalCanvas = document.createElement('canvas');
+            finalCanvas.width = targetWidth;
+            finalCanvas.height = targetHeight;
+            const ctx = finalCanvas.getContext('2d');
+
+            const x = (targetWidth - canvas.width) / 2;
+            const y = (targetHeight - canvas.height) / 2;
+
+            ctx.drawImage(canvas, x, y);
+
+            const link = document.createElement('a');
+            link.download = 'my-music-room.png';
+            link.href = finalCanvas.toDataURL('image/png');
+            link.click();
+        });
+    }
+
+
+
+    // COPY LINK
+    function copyLink(btn) {
+        const currentUrl = window.location.href;
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(currentUrl)
+                .catch((error) => {
+                    console.error('Error copying the link: ', error);
+                    fallbackCopyTextToClipboard(currentUrl, btn);
+                });
+        } else {
+            fallbackCopyTextToClipboard(currentUrl, btn);
+        }
+    }
+
+    function fallbackCopyTextToClipboard(text, btn) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            document.execCommand('copy');
+            const original = btn.getAttribute('data-tooltip');
+            btn.setAttribute('data-tooltip', 'Copied!');
+            setTimeout(() => {
+                btn.setAttribute('data-tooltip', original);
+            }, 2000);
+        } catch (err) {
+            console.error('Fallback: Oops, unable to copy', err);
+            btn.setAttribute('data-tooltip', 'Copy failed');
+            setTimeout(() => {
+                btn.setAttribute('data-tooltip', 'Copy Link');
+            }, 2000);
+        }
+
+        document.body.removeChild(textArea);
+    }
+
+    
+
+    // MUSIC NOTES ANIMATION
+    function createMusicNote() {
+        if (!currentAudio || currentAudio.paused) return;
+
+        const note = document.createElement('div');
+        note.className = 'music-note';
+        note.innerHTML = ['♪', '♫', '♬'][Math.floor(Math.random() * 3)];
+
+        const trackButton = document.getElementById('trackButton');
+        const rect = trackButton.getBoundingClientRect();
+
+        // Position at center of the track button
+        note.style.left = (rect.left + rect.width / 2) + 'px';
+        note.style.top = rect.top + 'px';
+
+        // Random drift between -30px and +30px
+        const drift = (Math.random() - 0.5) * 120;
+        note.style.setProperty('--drift', drift + 'px');
+
+        document.body.appendChild(note);
+
+        setTimeout(() => {
+            if (note.parentNode) {
+                note.parentNode.removeChild(note);
+            }
+        }, 3000);
+    }
+
+    let noteInterval;
+
+    function startMusicNotes() {
+        if (noteInterval) clearInterval(noteInterval);
+        noteInterval = setInterval(createMusicNote, 800);
+    }
+
+    function stopMusicNotes() {
+        if (noteInterval) {
+            clearInterval(noteInterval);
+            noteInterval = null;
+        }
+    }
+
+
+
+    //TOGLLE CHANGE ROOM
+    function toggleRoomGallery() {
+        const popup = document.getElementById("roomGalleryPopup");
+        popup.style.display = popup.style.display === "block" ? "none" : "block";
+    }
+
+    document.addEventListener("click", function(event) {
+        const popup = document.getElementById("roomGalleryPopup");
+        const button = document.querySelector("[onclick='toggleRoomGallery()']");
+        if (popup.style.display === "block" &&
+            !popup.contains(event.target) &&
+            !button.contains(event.target)) {
+            popup.style.display = "none";
+        }
+    });
+
+
+
+    //CHANGE ROOM LOGIC
+    document.addEventListener("DOMContentLoaded", () => {
+        const appUsername = "@Model.Username";
+         document.querySelector("#petSection .pet-info h2")
+              .textContent = `${appUsername}'s Pet`;
+
+        document
+        .querySelectorAll("#roomGalleryPopup .slide")
+        .forEach(img => img.addEventListener("click", e => {
+            const { room, nickname, pet, petname, petdescription } = e.currentTarget.dataset;
+
+             document.querySelector(".nickname-container h2").textContent = nickname;
+             document.querySelector("#imageContainer .cube-image")
+                  .src = `/images/rooms/${room}.png`;
+
+            document.querySelector("#petSection .pet-info h3")
+                  .textContent = petname;
+            document.querySelector("#petSection .pet-info p")
+                  .textContent = petdescription;
+
+            document.querySelector(".circle-window .parallax-image")
+                  .src = `/images/pets/${pet}.png`;
+
+            toggleRoomGallery();
+
+        }));
+
+        const galleryContent = document.querySelector(".room-gallery-content");
+        let isScrolling = false;
+        const scrollBoost = 3.7;
+
+        galleryContent.addEventListener("wheel", function (e) {
+            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                e.preventDefault();
+
+                if (!isScrolling) {
+                    isScrolling = true;
+
+                    this.scrollBy({
+                        left: e.deltaY * scrollBoost,
+                        behavior: 'smooth'
+                    });
+
+                    setTimeout(() => isScrolling = false, 100);
+                }
+            }
+        }, { passive: false });
+
+    });
+
+</script>
