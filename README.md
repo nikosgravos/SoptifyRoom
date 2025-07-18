@@ -4,6 +4,10 @@ Roomiify is a web app that transforms your music taste into a personalized virtu
 By connecting your Spotify account, Roomiify analyzes your top tracks and genres to generate a themed digital space — complete with custom visuals and a matching pet companion.
 Roomiify is developed using the **ASP.NET Core Web App framework** in **Visual Studio**.
 
+This app was created as part of a university thesis project.  
+The thesis and project are available online at the University of Piraeus repository:  
+https://dione.lib.unipi.gr/xmlui/handle/unipi/17920
+
 ## 🚀 Features
 
 - 🎧 Connect with Spotify to fetch your top songs and genres  
