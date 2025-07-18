@@ -4,7 +4,6 @@ Roomiify is a web app that turns your Spotify music taste into a personalized vi
 Built with **ASP.NET Core** in **Visual Studio**, this project was developed as part of a university thesis at the University of Piraeus.  
 📄 [Thesis & Demo](https://dione.lib.unipi.gr/xmlui/handle/unipi/17920)
 
----
 
 ## 🚀 Features
 
@@ -12,7 +11,6 @@ Built with **ASP.NET Core** in **Visual Studio**, this project was developed as 
 - Explore music-themed digital rooms  
 - Meet a genre-inspired pet companion  
 
----
 
 ## 🛠️ Getting Started
 
@@ -36,7 +34,6 @@ Built with **ASP.NET Core** in **Visual Studio**, this project was developed as 
    Launch the `.csproj` in Visual Studio and start the project.  
    The app will open at: `https://localhost:5000`
 
----
 
 ## 📄 License
 
