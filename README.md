@@ -31,4 +31,6 @@ To run Roomiify locally, follow these steps:
 
 ## 📄 License
 
-MIT License. Feel free to use and build upon Roomiify.
+- The **source code** is licensed under the [MIT License](LICENSE).  
+- The **images and other visual assets** are licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License](ASSETS_LICENSE).  
+  You may not use them for commercial purposes.
