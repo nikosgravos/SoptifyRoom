@@ -5,7 +5,7 @@ By connecting your Spotify account, Roomiify analyzes your top tracks and genres
 Roomiify is developed using the **ASP.NET Core Web App framework** in **Visual Studio**.
 
 This app was created as part of a university thesis project.  
-The thesis and project are available online at the University of Piraeus repository:  
+The thesis paper and a demo video are available online at the University of Piraeus repository:  
 https://dione.lib.unipi.gr/xmlui/handle/unipi/17920
 
 ## 🚀 Features
