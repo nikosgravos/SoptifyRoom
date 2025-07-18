@@ -17,21 +17,50 @@ https://dione.lib.unipi.gr/xmlui/handle/unipi/17920
 
 ## 🛠️ Getting Started
 
-To run Roomiify locally, follow these steps:
+To run **Roomiify** locally, follow the steps below:
+
+---
 
 ### 1. Create a Spotify Developer Account
 
-- Go to the Spotify Developer Dashboard: https://developer.spotify.com/dashboard/  
-- Log in and create a new app  
-- Set the Redirect URI to:  
-  https://localhost:5000/callback
+1. Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/)
+2. Log in with your Spotify account and click **"Create an App"**
+3. Set the **Redirect URI** for your app to:  
+   ```
+   https://localhost:5000/callback
+   ```
 
-### 2. Set Up Your Credentials
+---
 
-- In the `appsettings.json` file of the project, replace the following lines with your own values:
+### 2. Clone the Repository
 
+Clone this project using Git or open it directly in **Visual Studio** or your preferred IDE.
+
+```bash
+git clone https://github.com/your-username/roomiify.git
+```
+
+---
+
+### 3. Configure Your Spotify Credentials
+
+In the `appsettings.json` file of the project, replace the placeholder values with the credentials from your Spotify Developer app:
+
+```json
 "ClientId": "your-client-id-here",
 "ClientSecret": "your-client-secret-here"
+```
+
+---
+
+### 4. Run the Project
+
+1. Open the `.csproj` file in Visual Studio (or your IDE of choice).
+2. Run the application.
+
+The app will launch at `https://localhost:5000` and redirect to Spotify for login when needed.
+
+---
 
 ## 📄 License
 
