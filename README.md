@@ -4,6 +4,7 @@ Roomiify is a web app that turns your Spotify music taste into a personalized vi
 Built with **ASP.NET Core** in **Visual Studio**, this project was developed as part of a university thesis at the University of Piraeus.  
 📄 [Thesis & Demo](https://dione.lib.unipi.gr/xmlui/handle/unipi/17920)
 
+You can improve and modify this project in any way. A room template is provided so you can also create new rooms in Blender.
 
 ## 🚀 Features
 
