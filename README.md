@@ -1,7 +1,9 @@
 # Roomiify - Spotify Room
 
 Roomiify is a web app that turns your Spotify music taste into a personalized virtual room using your stats and listening habits, complete with themed visuals and a pet companion.  
+
 Built with the **ASP.NET Core** framework, this project was developed as part of a university thesis at the University of Piraeus. The thesis paper and a demo video can be found on the following link. 
+
 [Repository Dione of University of Piraeus](https://dione.lib.unipi.gr/xmlui/handle/unipi/17920)
 
 You can improve and modify this project in any way. A room template is provided so you can also create new 3D rooms in **Blender**.
