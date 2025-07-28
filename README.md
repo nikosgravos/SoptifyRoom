@@ -20,7 +20,7 @@ You can improve and modify this project in any way. A room template is provided 
 ## 🛠️ Getting Started
 
 **Requirements**
-[.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) must be installed.
+   [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) must be installed.
 
 1. **Create a Spotify App**  
    - Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) 
