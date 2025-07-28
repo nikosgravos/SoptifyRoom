@@ -1,4 +1,4 @@
-# Roomiify - Spotify Room
+# Roomiify - Spotify Room <img width="25" height="25" alt="RoomLogo" src="https://github.com/user-attachments/assets/79bef26c-1ee8-4ddd-8b95-2c6f33f0ae60"/>
 
 Roomiify is a web app that turns your Spotify music taste into a personalized virtual room using your stats and listening habits, complete with themed visuals and a pet companion.  
 
@@ -35,6 +35,7 @@ You can improve and modify this project in any way. A room template is provided 
    2. Replace the placeholder values for `ClientId` and `ClientSecret` with your Spotify app credentials from the Developer Dashboard.
 
 - **Running the App**  
+
    1. **Option A:** Using Visual Studio
       1. Open the `.csproj` file.
       2. Run the project.
