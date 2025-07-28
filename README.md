@@ -1,4 +1,4 @@
-# Roomiify - Spotify Room <img width="25" height="25" alt="RoomLogo" src="https://github.com/user-attachments/assets/79bef26c-1ee8-4ddd-8b95-2c6f33f0ae60"/>
+# <img width="30" height="30" alt="RoomLogo" src="https://github.com/user-attachments/assets/79bef26c-1ee8-4ddd-8b95-2c6f33f0ae60"/> Roomiify - Spotify Room 
 
 Roomiify is a web app that turns your Spotify music taste into a personalized virtual room using your stats and listening habits, complete with themed visuals and a pet companion.  
 
@@ -19,39 +19,37 @@ You can improve and modify this project in any way. A room template is provided 
 
 ## 🛠️ Getting Started
 
-- **Requirements**
-   1. [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) must be installed.
+1. **Install the [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0).**
 
-- **Create a Spotify App**  
-   1. Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) 
-   2. Create a new app and set the redirect URI to: `https://localhost:5000/callback` 
-   3. Make sure to enable the following APIs: Web API, Web Playback SDK, Android, Ads API, iOS  
+2. **Create a Spotify App**  
+   - Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) 
+   - Create a new app and set the redirect URI to: `https://localhost:5000/callback` 
+   - Make sure to enable the following APIs: Web API, Web Playback SDK, Android, Ads API, iOS  
 
-- **Clone the Project**  
-   1. Clone the repository to your local machine.
+3. **Clone the Project**  
+   - Clone the repository to your local machine.
 
-- **Configure Your Credentials**  
-   1. Open the `appsettings.json` file.
-   2. Replace the placeholder values for `ClientId` and `ClientSecret` with your Spotify app credentials from the Developer Dashboard.
+4. **Configure Your Credentials**  
+   - Open the `appsettings.json` file.
+   - Replace the placeholder values for `ClientId` and `ClientSecret` with your Spotify app credentials from the Developer Dashboard.
 
-- **Running the App**  
+## 🏃‍♂️‍➡️ Running the App
 
-   1. **Option A:** Using Visual Studio
-      1. Open the `.csproj` file.
-      2. Run the project.
-   1. **Option B:** Without Visual Studio (Command Line)
-      1. Open a terminal or command prompt.
-      2. Navigate to the project folder:
-         ```bash
-         cd SpotifyRoomApp
-      3. Run the app:
-         ```bash
-         dotnet run --urls "https://localhost:5000"
-      4. Open your browser and go to: https://localhost:5000
+1. **Using Visual Studio** 
+   - Open the `.csproj` file.
+   - Run the project.
+2. **Without Visual Studio (Command Line)**
+   - Open a terminal or command prompt.
+   - Navigate to the project folder:
+      ```bash
+      cd SpotifyRoomApp
+   - Run the app:
+      ```bash
+      dotnet run --urls "https://localhost:5000"
+   - Open your browser and go to: https://localhost:5000
         
    
-
 ## 📄 License
 
 - Source code: [MIT License](LICENSE)  
-- Visual assets: [CC BY-NC 4.0](ASSETS_LICENSE) – Non-commercial use only
+- Visual assets: [CC BY-NC 4.0](ASSETS_LICENSE)
