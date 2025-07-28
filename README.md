@@ -47,9 +47,3 @@ You can improve and modify this project in any way. A room template is provided 
       ```bash
       dotnet run --urls "https://localhost:5000"
    - Open your browser and go to: https://localhost:5000
-        
-   
-## 📄 License
-
-- Source code: [MIT License](LICENSE)  
-- Visual assets: [CC BY-NC 4.0](ASSETS_LICENSE)
