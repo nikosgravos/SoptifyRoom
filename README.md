@@ -19,22 +19,22 @@ You can improve and modify this project in any way. A room template is provided 
 
 ## 🛠️ Getting Started
 
-**Requirements**
-   [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) must be installed.
+1. **Requirements**
+   - [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) must be installed.
 
-1. **Create a Spotify App**  
+2. **Create a Spotify App**  
    - Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) 
    - Create a new app and set the redirect URI to: `https://localhost:5000/callback` 
    - Make sure to enable the following APIs: Web API, Web Playback SDK, Android, Ads API, iOS  
 
-2. **Clone the Project**  
+3. **Clone the Project**  
    - Clone the repository to your local machine.
 
-3. **Configure Your Credentials**  
+4. **Configure Your Credentials**  
    - Open the `appsettings.json` file.
    - Replace the placeholder values for `ClientId` and `ClientSecret` with your Spotify app credentials from the Developer Dashboard.
 
-4. **Running the App**  
+5. **Running the App**  
    - **Option A:** Using Visual Studio
       1. Open the `.csproj` file.
       2. Run the project.
