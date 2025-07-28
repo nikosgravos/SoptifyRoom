@@ -34,17 +34,17 @@ You can improve and modify this project in any way. A room template is provided 
 
 4. **Running the App**  
    - **Option A:** Using Visual Studio
-      - Open the `.csproj` file.
-      - Run the project.
-   - **Optiob B:** Without Visual Studio (Command Line)
-      - Open a terminal or command prompt.
-      - Navigate to the project folder:
-        ```bash
-        cd SpotifyRoomApp
-      - Run the app:
-        ```bash
-        dotnet run --urls "https://localhost:5000"
-      - Open your browser and go to: https://localhost:5000
+      1. Open the `.csproj` file.
+      2. Run the project.
+   - **Option B:** Without Visual Studio (Command Line)
+      1. Open a terminal or command prompt.
+      2. Navigate to the project folder:
+         ```bash
+         cd SpotifyRoomApp
+      3. Run the app:
+         ```bash
+         dotnet run --urls "https://localhost:5000"
+      4. Open your browser and go to: https://localhost:5000
         
    
 
