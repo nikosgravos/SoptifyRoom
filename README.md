@@ -17,6 +17,9 @@ You can improve and modify this project in any way. A room template is provided 
 
 ## 🛠️ Getting Started
 
+**Requirements**
+[.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) must be installed.
+
 1. **Create a Spotify App**  
    - Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) 
    - Create a new app and set the redirect URI to: `https://localhost:5000/callback` 
@@ -24,15 +27,25 @@ You can improve and modify this project in any way. A room template is provided 
 
 2. **Clone the Project**  
    - Clone the repository to your local machine.
-   - Open the project folder using Visual Studio or your preferred IDE.
 
 3. **Configure Your Credentials**  
    - Open the `appsettings.json` file.
    - Replace the placeholder values for `ClientId` and `ClientSecret` with your Spotify app credentials from the Developer Dashboard.
 
-4. **Run the App**  
-   - Open the `.csproj file` in your IDE.
-   - Run the project.
+4. **Running the App**  
+   - **Option A:** Using Visual Studio
+      - Open the `.csproj` file.
+      - Run the project.
+   - **Optiob B:** Without Visual Studio (Command Line)
+      - Open a terminal or command prompt.
+      - Navigate to the project folder:
+        ```bash
+        cd SpotifyRoomApp
+      - Run the app:
+        ```bash
+        dotnet run --urls "https://localhost:5000"
+      - Open your browser and go to: https://localhost:5000
+        
    
 
 ## 📄 License
