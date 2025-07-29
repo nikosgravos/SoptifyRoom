@@ -43,6 +43,8 @@ You can improve and modify this project in any way. A room template is provided 
    - Navigate to the project folder:
       ```bash
       cd SpotifyRoomApp
+      ```
+      or find the `SpotifyRoomApp` folder in File Explorer, right click and select Open in Terminal
    - Run the app:
       ```bash
       dotnet run --urls "https://localhost:5000"
