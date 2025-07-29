@@ -48,7 +48,7 @@ You can improve and modify this project in any way. A room template is provided 
       dotnet run --urls "https://localhost:5000"
    - Open your browser and go to: https://localhost:5000
 
-## 🛠️ Example Room
+## 🎵 Example Room
 
 <img width="500" height="500" alt="my-music-room" src="https://github.com/user-attachments/assets/2b79db4f-38a5-40f2-a38e-f876e833df69" />
 
