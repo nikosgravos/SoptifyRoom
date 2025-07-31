@@ -23,7 +23,7 @@ You can improve and modify this project in any way. A room template is provided 
 
 2. **Create a Spotify App**  
    - Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) 
-   - Create a new app and set the redirect URI to: `https://localhost:5000/callback` 
+   - Create a new app and set the redirect URI to: `http://[::1]:5000/callback` 
    - Make sure to enable the following APIs: Web API, Web Playback SDK, Android, Ads API, iOS  
 
 3. **Clone the Project**  
@@ -47,8 +47,8 @@ You can improve and modify this project in any way. A room template is provided 
       or find the `SpotifyRoomApp` folder in File Explorer, right click and select Open in Terminal
    - Run the app:
       ```bash
-      dotnet run --urls "https://localhost:5000"
-   - Open your browser and go to: https://localhost:5000
+      dotnet run --urls "http://[::1]:5000"
+   - Open your browser and go to: http://[::1]:5000
 
 ## 🎵 Example Room
 
